@@ -24,7 +24,8 @@ public class Main extends Application {
     private Label lblFirstName = new Label("FirstName");
     private Label lblLastName = new Label("LastName");
     private Label lblCity = new Label("City");
-    private Label lblMsg = new Label("Please input the number(int) and click the image to order");
+    private Label lblMsg = new Label("Please input the number(int) and "
+            + "click the image to order");
 
     private TextField txtOrderID = new TextField();
     private TextField txtFirstName = new TextField();
@@ -44,21 +45,18 @@ public class Main extends Application {
     // https://7esl.com/fruits-vocabulary-english/
     private Image imgA = new Image("images/apple.png", 100, 100, true, true);
     private ImageView imgAview = new ImageView(imgA);
-    private Button btnImgA = new Button("", imgAview);
 
     private Image imgB = new Image("images/orange.png", 100, 100, true, true);
     private ImageView imgBview = new ImageView(imgB);
-    private Button btnImgB = new Button("", imgBview);
 
     private Image imgC = new Image("images/strawberry.png", 100, 100, true, true);
     private ImageView imgCview = new ImageView(imgC);
-    private Button btnImgC = new Button("", imgCview);
 
     private Image imgD = new Image("images/pear.png", 100, 100, true, true);
     private ImageView imgDview = new ImageView(imgD);
-    private Button btnImgD = new Button("", imgDview);
 
     private Button btnDisplay = new Button("Display the order details");
+    
     private int orderNumberA;
     private int orderNumberB;
     private int orderNumberC;
@@ -68,10 +66,21 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        orderA(btnImgA, txtOrderNumberA);
-        orderB(btnImgB, txtOrderNumberB);
-        orderC(btnImgC, txtOrderNumberC);
-        orderD(btnImgD, txtOrderNumberD);
+        // click img to order
+        imgAview.setOnMouseClicked((e) -> {
+            orderNumberA = Integer.parseInt(txtOrderNumberA.getText());
+        });
+        imgBview.setOnMouseClicked((e) -> {
+            orderNumberB = Integer.parseInt(txtOrderNumberB.getText());
+        });
+        imgCview.setOnMouseClicked((e) -> {
+            orderNumberC = Integer.parseInt(txtOrderNumberC.getText());
+        });
+        imgDview.setOnMouseClicked((e) -> {
+            orderNumberD = Integer.parseInt(txtOrderNumberD.getText());
+        });
+        
+        // display the order details
         displayOrder(one);
 
         Scene scene = new Scene(getGrid(), 500, 300);
@@ -85,50 +94,6 @@ public class Main extends Application {
             process(one);
             DisplayOrder ds = new DisplayOrder(one);
             ds.show();
-        });
-    }
-
-    public void orderA(Button btnImg, TextField txtOrderNumber) {
-        btnImg.setOnAction((e) -> {
-            try {
-                orderNumberA = Integer.parseInt(txtOrderNumber.getText());
-            } catch (Exception e1) {
-                txtOrderNumber.setText("0");
-                System.out.println(e1.getMessage());
-            }
-        });
-    }
-
-    public void orderB(Button btnImg, TextField txtOrderNumber) {
-        btnImg.setOnAction((e) -> {
-            try {
-                orderNumberB = Integer.parseInt(txtOrderNumber.getText());
-            } catch (Exception e1) {
-                txtOrderNumber.setText("0");
-                System.out.println(e1.getMessage());
-            }
-        });
-    }
-
-    public void orderC(Button btnImg, TextField txtOrderNumber) {
-        btnImg.setOnAction((e) -> {
-            try {
-                orderNumberC = Integer.parseInt(txtOrderNumber.getText());
-            } catch (Exception e1) {
-                txtOrderNumber.setText("0");
-                System.out.println(e1.getMessage());
-            }
-        });
-    }
-
-    public void orderD(Button btnImg, TextField txtOrderNumber) {
-        btnImg.setOnAction((e) -> {
-            try {
-                orderNumberD = Integer.parseInt(txtOrderNumber.getText());
-            } catch (Exception e1) {
-                txtOrderNumber.setText("0");
-                System.out.println(e1.getMessage());
-            }
         });
     }
 
@@ -158,10 +123,10 @@ public class Main extends Application {
         pane.add(txtOrderNumberC, 2, 4);
         pane.add(txtOrderNumberD, 3, 4);
 
-        pane.add(btnImgA, 0, 5);
-        pane.add(btnImgB, 1, 5);
-        pane.add(btnImgC, 2, 5);
-        pane.add(btnImgD, 3, 5);
+        pane.add(imgAview, 0, 5);
+        pane.add(imgBview, 1, 5);
+        pane.add(imgCview, 2, 5);
+        pane.add(imgDview, 3, 5);
         pane.add(btnDisplay, 1, 6, 2, 1);
 
         return pane;
